@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using Trash.Models;
 
 namespace Trash.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class CustomersController : Controller
     {
         public ApplicationDbContext _context;
@@ -62,19 +64,22 @@ namespace Trash.Controllers
                 customer.IdentityUserId = userId;
 
                 //add customer to customers table in DB
-
+                _context.Customers.Add(customer);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(); 
             }
         }
 
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Customer customer = new Customer();
+            customer.CustomerId = id;
+            return View(customer);
         }
 
         // POST: Customer/Edit/5
@@ -85,7 +90,18 @@ namespace Trash.Controllers
             try
             {
                 // TODO: Add update logic here
-
+                Customer newCustomer = _context.Customers.Where(a => a.CustomerId == id).Single();
+                newCustomer.FirstName = customer.FirstName;
+                newCustomer.LastName = customer.LastName;
+                newCustomer.PickUpDay = customer.PickUpDay;
+                newCustomer.StreetAddress = customer.StreetAddress;
+                newCustomer.City = customer.City;
+                newCustomer.State = customer.State;
+                newCustomer.Zipcode = customer.Zipcode;
+                newCustomer.OneTimePickUp = customer.OneTimePickUp;
+                newCustomer.StartSupension = customer.StartSupension;
+                newCustomer.EndSuspension = customer.EndSuspension;
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +12,12 @@ using Trash.Models;
 
 namespace Trash.Controllers
 {
+    [Authorize(Roles = "Employee")]
     public class EmployeesController : Controller
     {
         public ApplicationDbContext _context;
         private object context;
-        public object Customers { get; private set; }
+        //public object Customers { get; private set; }
         // GET: Employees
         public ActionResult Index()
         {
