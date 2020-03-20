@@ -59,7 +59,7 @@ namespace Trash.Data
                      Zipcode = 2,
                      Balance = 0,
                      OneTimePickUp = 11,
-                     StartSupension = 0,
+                     StartSuspension = 0,
                      EndSuspension = 0,
                      isSuspended = false,
                  });
@@ -76,7 +76,7 @@ namespace Trash.Data
                      Zipcode = 16,
                      Balance = 0,
                      OneTimePickUp = 5,
-                     StartSupension = 0,
+                     StartSuspension = 0,
                      EndSuspension = 0,
                      isSuspended = false,
                  });
@@ -93,7 +93,7 @@ namespace Trash.Data
                      Zipcode = 16,
                      Balance = 0,
                      OneTimePickUp = 1,
-                     StartSupension = 0,
+                     StartSuspension = 0,
                      EndSuspension = 0,
                      isSuspended = false,
                  });

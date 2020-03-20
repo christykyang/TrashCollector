@@ -16,7 +16,7 @@ namespace Trash.Controllers
     public class EmployeesController : Controller
     {
         public ApplicationDbContext _context;
-        private object context;
+        private  object context;
         //public object Customers { get; private set; }
         // GET: Employees
         public ActionResult Index()

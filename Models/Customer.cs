@@ -19,7 +19,7 @@ namespace Trash.Models
         public int Zipcode { get; set; }
         public int Balance { get; set; }
         public int OneTimePickUp { get; set; }
-        public int StartSupension { get; set; }
+        public int StartSuspension { get; set; }
         public int EndSuspension { get; set; }
         public bool isSuspended { get; set; }
         [ForeignKey("IdentityUser")]

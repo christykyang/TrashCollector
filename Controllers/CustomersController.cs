@@ -99,7 +99,7 @@ namespace Trash.Controllers
                 newCustomer.State = customer.State;
                 newCustomer.Zipcode = customer.Zipcode;
                 newCustomer.OneTimePickUp = customer.OneTimePickUp;
-                newCustomer.StartSupension = customer.StartSupension;
+                newCustomer.StartSuspension = customer.StartSuspension;
                 newCustomer.EndSuspension = customer.EndSuspension;
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
