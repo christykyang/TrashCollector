@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trash.Data;
 
 namespace Trash.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200319212505_Try2")]
+    partial class Try2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,22 +46,6 @@ namespace Trash.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "0049757c-0831-42a6-9b12-e8e22a4b347d",
-                            ConcurrencyStamp = "ebdba65b-23df-4e1c-8f51-b203424d4004",
-                            Name = "Employee",
-                            NormalizedName = "EMPLOYEE"
-                        },
-                        new
-                        {
-                            Id = "149dd6b5-5b64-4ac9-b286-73fb11f27b2f",
-                            ConcurrencyStamp = "aad036d7-2442-43bf-a05b-ab685d838e4b",
-                            Name = "Customer",
-                            NormalizedName = "CUSTOMER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -255,6 +241,15 @@ namespace Trash.Data.Migrations
                     b.HasIndex("IdentityUserId");
 
                     b.ToTable("Employee");
+
+                    b.HasData(
+                        new
+                        {
+                            EmployeeId = 1,
+                            FirstName = "Christy",
+                            LastName = "Yang",
+                            Zipcode = 53022
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
