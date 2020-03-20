@@ -18,12 +18,14 @@ namespace Trash.Models
         public string State { get; set; }
         public int Zipcode { get; set; }
         public int Balance { get; set; }
-        public string OneTimePickUp { get; set; }
-        public string StartSupension { get; set; }
-        public string EndSuspension { get; set; }
+        public int OneTimePickUp { get; set; }
+        public int StartSupension { get; set; }
+        public int EndSuspension { get; set; }
         public bool isSuspended { get; set; }
         [ForeignKey("IdentityUser")]
-        public string IdentityUser { get; set; }
-        public IdentityUser identityUser { get; set; }
+        public string IdentityUserId { get; set; }
+        public IdentityUser IdentityUser { get; set; }
+
+        public IEnumerable<Customer> Customers { get; set; }
     }
 }

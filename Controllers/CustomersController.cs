@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Trash.Data;
@@ -11,42 +12,56 @@ using Trash.Models;
 
 namespace Trash.Controllers
 {
-    public class EmployeesController : Controller
+    public class CustomersController : Controller
     {
         public ApplicationDbContext _context;
         private object context;
-        public object Customers { get; private set; }
-        // GET: Employees
+        //public object Customers { get; private set; }
+        public IdentityUser IdentityUser { get; private set; }
+
+        // GET: Customer
         public ActionResult Index()
         {
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
-            
-            var customers = _context.Customers.Include(k => k.IdentityUser).Where(c => c.Zipcode == employeeLoggedIn.Zipcode).ToList();
-            //query customers variable by day of week (compare to today's day of week)
-            return View(customers);
+
+            var customer = _context.Customers.Include(k => k.IdentityUser).Where(c => c.IdentityUserId == userId).Single();
+
+            return View(customer);
         }
 
-        // GET: Employees/Details/5
+        // GET: Customer/Details/5
         public ActionResult Details(int id)
-        {            var customer = _context.Customers.Include(k => k.IdentityUser).SingleOrDefault(c => c.CustomerId == id);
-            return View();
+        {
+            var customer = _context.Customers.Include(k => k.IdentityUser).SingleOrDefault(c => c.CustomerId == id);
+            return View(customer);
         }
 
-        // GET: Employees/Create
+        // GET: Customer/Create
         public ActionResult Create()
         {
-            return View();
+           // var customers = _context.Customers.ToList();
+            Customer customer = new Customer();
+            {
+                IdentityUser = IdentityUser;
+            }
+            return View(customer);
         }
 
-        // POST: Employees/Create
+        // POST: Customer/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Employee employee)
+        public ActionResult Create(Customer customer)
         {
             try
             {
                 // TODO: Add insert logic here
+                //access current sign-in user (identity user)
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                //assign customer FK to identityuser PK
+                customer.IdentityUserId = userId;
+
+                //add customer to customers table in DB
 
                 return RedirectToAction(nameof(Index));
             }
@@ -56,16 +71,16 @@ namespace Trash.Controllers
             }
         }
 
-        // GET: Employees/Edit/5
+        // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Employees/Edit/5
+        // POST: Customer/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer customer)
         {
             try
             {
@@ -79,13 +94,13 @@ namespace Trash.Controllers
             }
         }
 
-        // GET: Employees/Delete/5
+        // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Employees/Delete/5
+        // POST: Customer/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

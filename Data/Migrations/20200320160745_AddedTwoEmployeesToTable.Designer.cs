@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Trash.Data;
 
 namespace Trash.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200320160745_AddedTwoEmployeesToTable")]
+    partial class AddedTwoEmployeesToTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,15 +50,15 @@ namespace Trash.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3a0b8508-712b-4670-9fb7-80611393a317",
-                            ConcurrencyStamp = "06a10c2f-2190-48a6-a8a4-75e45cc47317",
+                            Id = "d897a77c-2b65-464e-ab0e-544492b5e6ad",
+                            ConcurrencyStamp = "334681a8-d6ae-4530-bf1c-bc7e1c8c1bbd",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
-                            Id = "51db0e46-441c-47ff-ba71-347bdc5af335",
-                            ConcurrencyStamp = "8a2c9e86-94dc-4012-adc7-1297c6491b7f",
+                            Id = "30c2f230-a073-4a53-99e3-601bdef17018",
+                            ConcurrencyStamp = "c9e57773-3e54-4052-8602-9e1547959343",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         });
@@ -247,8 +249,8 @@ namespace Trash.Data.Migrations
                     b.Property<int?>("CustomerId1")
                         .HasColumnType("int");
 
-                    b.Property<int>("EndSuspension")
-                        .HasColumnType("int");
+                    b.Property<string>("EndSuspension")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -259,14 +261,14 @@ namespace Trash.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OneTimePickUp")
-                        .HasColumnType("int");
+                    b.Property<string>("OneTimePickUp")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PickUpDay")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StartSupension")
-                        .HasColumnType("int");
+                    b.Property<string>("StartSupension")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
@@ -287,56 +289,6 @@ namespace Trash.Data.Migrations
                     b.HasIndex("IdentityUserId");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            CustomerId = 1,
-                            Balance = 0,
-                            City = "Puppy Town",
-                            EndSuspension = 0,
-                            FirstName = "Neko",
-                            LastName = "Yang",
-                            OneTimePickUp = 11,
-                            PickUpDay = "Monday",
-                            StartSupension = 0,
-                            State = "Dog World",
-                            StreetAddress = "123 1st Street",
-                            Zipcode = 2,
-                            isSuspended = false
-                        },
-                        new
-                        {
-                            CustomerId = 2,
-                            Balance = 0,
-                            City = "Puppy Town",
-                            EndSuspension = 0,
-                            FirstName = "Nel",
-                            LastName = "Yang",
-                            OneTimePickUp = 5,
-                            PickUpDay = "Wednesday",
-                            StartSupension = 0,
-                            State = "Dog World",
-                            StreetAddress = "456 2nd Street",
-                            Zipcode = 16,
-                            isSuspended = false
-                        },
-                        new
-                        {
-                            CustomerId = 3,
-                            Balance = 0,
-                            City = "Puppy Town",
-                            EndSuspension = 0,
-                            FirstName = "Nyx",
-                            LastName = "Yang",
-                            OneTimePickUp = 1,
-                            PickUpDay = "Friday",
-                            StartSupension = 0,
-                            State = "Dog World",
-                            StreetAddress = "789 3rd Street",
-                            Zipcode = 16,
-                            isSuspended = false
-                        });
                 });
 
             modelBuilder.Entity("Trash.Models.Employee", b =>
@@ -375,14 +327,14 @@ namespace Trash.Data.Migrations
                             EmployeeId = 1,
                             FirstName = "CK",
                             LastName = "Y",
-                            Zipcode = 16
+                            Zipcode = 53035
                         },
                         new
                         {
                             EmployeeId = 2,
                             FirstName = "KN",
                             LastName = "B",
-                            Zipcode = 2
+                            Zipcode = 53022
                         });
                 });
 
