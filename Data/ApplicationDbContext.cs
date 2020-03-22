@@ -36,7 +36,7 @@ namespace Trash.Data
                     EmployeeId = 1,
                     FirstName = "CK",
                     LastName = "Y",
-                    Zipcode = 16,
+                    Zipcode = 53035,
                 }); 
             builder.Entity<Employee>().HasData(
                  new Employee
@@ -44,7 +44,7 @@ namespace Trash.Data
                      EmployeeId = 2,
                      FirstName = "KN",
                      LastName = "B",
-                     Zipcode = 2,
+                     Zipcode = 53022,
                  });
             builder.Entity<Customer>().HasData(
                  new Customer
@@ -56,7 +56,7 @@ namespace Trash.Data
                      StreetAddress = "123 1st Street",
                      City = "Puppy Town",
                      State = "Dog World",
-                     Zipcode = 2,
+                     Zipcode = 53022,
                      Balance = 0,
                      OneTimePickUp = 11,
                      StartSuspension = 0,
@@ -73,7 +73,7 @@ namespace Trash.Data
                      StreetAddress = "456 2nd Street",
                      City = "Puppy Town",
                      State = "Dog World",
-                     Zipcode = 16,
+                     Zipcode = 53035,
                      Balance = 0,
                      OneTimePickUp = 5,
                      StartSuspension = 0,
@@ -90,7 +90,7 @@ namespace Trash.Data
                      StreetAddress = "789 3rd Street",
                      City = "Puppy Town",
                      State = "Dog World",
-                     Zipcode = 16,
+                     Zipcode = 53035,
                      Balance = 0,
                      OneTimePickUp = 1,
                      StartSuspension = 0,

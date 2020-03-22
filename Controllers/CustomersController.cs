@@ -18,6 +18,10 @@ namespace Trash.Controllers
     {
         public ApplicationDbContext _context;
         private object context;
+        public CustomersController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         //public object Customers { get; private set; }
         public IdentityUser IdentityUser { get; private set; }
 
