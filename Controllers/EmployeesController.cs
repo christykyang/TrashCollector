@@ -25,7 +25,6 @@ namespace Trash.Controllers
         {
             _context = context;
         }
-        //public object Customers { get; private set; }
         // GET: Employees
         public ActionResult Index()
         {
@@ -33,8 +32,19 @@ namespace Trash.Controllers
             var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
             
             var customers = _context.Customers.Include(k => k.IdentityUser).Where(c => c.Zipcode == employeeLoggedIn.Zipcode).ToList();
+            
             //query customers variable by day of week (compare to today's day of week)
+            //DateTime.Now
+
             return View(customers);
+        }
+
+        public ActionResult FilterByDayOfWeek(string day)
+        {
+            //pass back a string value from View to Controller method
+
+
+            //return View("Index", customers);
         }
 
         // GET: Employees/Details/5
@@ -81,18 +91,24 @@ namespace Trash.Controllers
         // GET: Employees/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Customer customer = new Customer();
+            customer.CustomerId = id;
+            return View(customer);
         }
 
         // POST: Employees/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Customer customer)
         {
             try
             {
+                //UPDATE Customer Balance??
+                int chargeForPickUp = 50;
                 // TODO: Add update logic here
-
+                Customer newCustomer = _context.Customers.Where(a => a.CustomerId == id).Single();
+                newCustomer.Balance = customer.Balance + chargeForPickUp;
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -102,26 +118,26 @@ namespace Trash.Controllers
         }
 
         // GET: Employees/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
-        // POST: Employees/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //// POST: Employees/Delete/5
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
