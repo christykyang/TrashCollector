@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Trash.Data;
@@ -17,6 +18,9 @@ namespace Trash.Controllers
     {
         public ApplicationDbContext _context;
         private object context;
+
+        public IdentityUser IdentityUser { get; private set; }
+
         public EmployeesController(ApplicationDbContext context)
         {
             _context = context;
@@ -35,14 +39,19 @@ namespace Trash.Controllers
 
         // GET: Employees/Details/5
         public ActionResult Details(int id)
-        {            var customer = _context.Customers.Include(k => k.IdentityUser).SingleOrDefault(c => c.CustomerId == id);
+        {            
+            var customer = _context.Customers.Include(k => k.IdentityUser).SingleOrDefault(c => c.CustomerId == id);
             return View();
         }
 
         // GET: Employees/Create
         public ActionResult Create()
         {
-            return View();
+            Employee employee = new Employee();
+            {
+                IdentityUser = IdentityUser;
+            }
+            return View(employee);
         }
 
         // POST: Employees/Create
@@ -53,7 +62,14 @@ namespace Trash.Controllers
             try
             {
                 // TODO: Add insert logic here
+                var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+                //assign customer FK to identityuser PK
+                employee.IdentityUserId = userId;
+
+                //add customer to customers table in DB
+                _context.Employees.Add(employee);
+                _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             catch
