@@ -82,7 +82,8 @@ namespace Trash.Controllers
         public ActionResult Edit(int id)
         {
             Customer customer = new Customer();
-            customer.CustomerId = id;
+            customer.Customers.Single(cust => cust.CustomerId == id);
+
             return View(customer);
         }
 

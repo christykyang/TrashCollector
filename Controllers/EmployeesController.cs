@@ -17,8 +17,8 @@ namespace Trash.Controllers
     public class EmployeesController : Controller
     {
         public ApplicationDbContext _context;
-        private object context;
-
+        private object context; 
+        public static DateTime Now { get; }
         public IdentityUser IdentityUser { get; private set; }
 
         public EmployeesController(ApplicationDbContext context)
@@ -28,11 +28,12 @@ namespace Trash.Controllers
         // GET: Employees
         public ActionResult Index()
         {
+            
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
             
-            var customers = _context.Customers.Include(k => k.IdentityUser).Where(c => c.Zipcode == employeeLoggedIn.Zipcode).ToList();
-            
+            var customers = _context.Customers.Include(k => k.IdentityUser).Where(c => c.Zipcode == employeeLoggedIn.Zipcode).Where(a => a.PickUpDay == DateTime.Now.DayOfWeek.ToString()).ToList();
+
             //query customers variable by day of week (compare to today's day of week)
             //DateTime.Now
 
@@ -42,16 +43,19 @@ namespace Trash.Controllers
         public ActionResult FilterByDayOfWeek(string day)
         {
             //pass back a string value from View to Controller method
+            if (!String.IsNullOrEmpty(day))
+            {
+                var customers = _context.Customers.Where(c => c.PickUpDay.Contains(day));
+            }
 
-
-            //return View("Index", customers);
+            return View("Index", "Customers");
         }
 
         // GET: Employees/Details/5
         public ActionResult Details(int id)
         {            
             var customer = _context.Customers.Include(k => k.IdentityUser).SingleOrDefault(c => c.CustomerId == id);
-            return View();
+            return View(customer);
         }
 
         // GET: Employees/Create

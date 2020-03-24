@@ -21,7 +21,18 @@ namespace Trash.Controllers
         public IActionResult Index()
         {
             //redirect based on role
-                    public IActionResult Error()
+            if (this.User.IsInRole("Customer"))
+            {
+                return View("Create", "Customers");
+            }
+            else if (this.User.IsInRole("Employee"))
+            {
+                return View("Create", "Employees");
+            }
+            return View();
+
+        }
+       public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

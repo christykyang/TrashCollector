@@ -36,7 +36,7 @@ namespace Trash.Data
                     EmployeeId = 1,
                     FirstName = "CK",
                     LastName = "Y",
-                    Zipcode = 16,
+                    Zipcode = 53227,
                 }); 
             builder.Entity<Employee>().HasData(
                  new Employee
@@ -44,7 +44,7 @@ namespace Trash.Data
                      EmployeeId = 2,
                      FirstName = "KN",
                      LastName = "B",
-                     Zipcode = 2,
+                     Zipcode = 53213,
                  });
 
         }

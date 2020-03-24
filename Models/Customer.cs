@@ -21,15 +21,15 @@ namespace Trash.Models
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public int Zipcode { get; set; }
+        public double Zipcode { get; set; }
         [Display(Name = "Account Balance")]
-        public int Balance { get; set; }
+        public double Balance { get; set; }
         [Display(Name = "One Time Pick-Up Date")]
-        public int OneTimePickUp { get; set; }
+        public double OneTimePickUp { get; set; }
         [Display(Name = "Start of Suspension Date")]
-        public int StartSuspension { get; set; }
+        public double StartSuspension { get; set; }
         [Display(Name = "End of Suspension Date")]
-        public int EndSuspension { get; set; }
+        public double EndSuspension { get; set; }
         [Display(Name = "Account Suspended")]
         public bool isSuspended { get; set; }
         [ForeignKey("IdentityUser")]
