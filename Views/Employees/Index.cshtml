@@ -8,15 +8,10 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a> |
+    <a asp-controller="Employees"
+       asp-action="FilterByDayOfWeek">Filter by Day</a>
 </p>
-@using (Html.BeginForm())
-{
-    <p>
-        Find by Day of the Week: @Html.TextBox("day")
-        <input type="submit" value="Search" />
-    </p>
-}
 <table class="table">
     <thead>
         <tr>

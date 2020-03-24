@@ -44,15 +44,20 @@ namespace Trash.Controllers
             return View(customers);
         }
 
-        public ActionResult FilterByDayOfWeek(string day)
+        public async Task<ActionResult> FilterByDayOfWeekAsync(string day)
         {
             //pass back a string value from View to Controller method
+            ViewData["CurrentFilter"] = String.IsNullOrEmpty(day);
+
+            var customers = from s in _context.Customers
+                            select s;
+
             if (!String.IsNullOrEmpty(day))
             {
-                var customers = _context.Customers.Where(c => c.PickUpDay.Contains(day));
+                customers = customers.Where(c => c.PickUpDay.Contains(day));
             }
 
-            return View("Index", "Customers");
+            return View(await customers.AsNoTracking().ToListAsync());
         }
 
         // GET: Employees/Details/5
