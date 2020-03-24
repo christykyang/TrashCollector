@@ -44,7 +44,7 @@ namespace Trash.Controllers
             return View(customers);
         }
 
-        public async Task<ActionResult> FilterByDayOfWeekAsync(string day)
+        public ActionResult FilterByDayOfWeek(string day)
         {
             //pass back a string value from View to Controller method
             ViewData["CurrentFilter"] = String.IsNullOrEmpty(day);
@@ -57,7 +57,7 @@ namespace Trash.Controllers
                 customers = customers.Where(c => c.PickUpDay.Contains(day));
             }
 
-            return View(await customers.AsNoTracking().ToListAsync());
+            return View();
         }
 
         // GET: Employees/Details/5
