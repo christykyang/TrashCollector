@@ -32,7 +32,7 @@ namespace Trash.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
             
-            var customers = _context.Customers.Include(k => k.IdentityUser).Where(c => c.Zipcode == employeeLoggedIn.Zipcode).Where(a => a.PickUpDay == DateTime.Now.DayOfWeek.ToString()).Where(b => b.isSuspended == false).ToList();
+            var customers = _context.Customers.Include(k => k.IdentityUser).Where(c => c.Zipcode == employeeLoggedIn.Zipcode).ToList();
 
             //query customers variable by day of week (compare to today's day of week)
             //DateTime.Now

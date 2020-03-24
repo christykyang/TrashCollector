@@ -56,9 +56,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.isSuspended)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdentityUser)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -103,11 +100,8 @@
                     @Html.DisplayFor(modelItem => item.isSuspended)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdentityUser.Id)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CustomerId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.CustomerId">Pick Up Confirmation</a> |
+                    <a asp-action="Details" asp-route-id="@item.CustomerId">Customer Information</a> |
                 </td>
             </tr>
         }
