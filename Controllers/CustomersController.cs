@@ -72,7 +72,7 @@ namespace Trash.Controllers
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
                 return View(); 
             }
@@ -82,7 +82,7 @@ namespace Trash.Controllers
         public ActionResult Edit(int id)
         {
             Customer customer = new Customer();
-            customer.Customers.Single(cust => cust.CustomerId == id);
+            customer.CustomerId = id;
 
             return View(customer);
         }

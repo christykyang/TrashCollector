@@ -20,6 +20,6 @@ namespace Trash.Models
         public string IdentityUserId { get; set; }
         public IdentityUser identityUser { get; set; }
         
-        public IEnumerable<Employee> Employees { get; set; }
+        //public IEnumerable<Employee> Employees { get; set; }
     }
 }
