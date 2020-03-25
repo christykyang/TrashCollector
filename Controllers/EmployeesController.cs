@@ -114,9 +114,9 @@ namespace Trash.Controllers
             {
                 Customer newCustomer = _context.Customers.Where(a => a.CustomerId == id).Single();
                 //UPDATE Customer Balance??
-                int chargeForPickUp = 50;
+                int chargeForPickUp = Convert.ToInt32(HttpContext.Request.Form["chargingPrice"].ToString());
                 // TODO: Add update logic here
-                newCustomer.Balance = customer.Balance + chargeForPickUp;
+                newCustomer.Balance += chargeForPickUp;
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

@@ -11,15 +11,11 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div class="form-group">
-                <label asp-for="Balance" class="control-label"></label>
-                <input asp-for="Balance" class="form-control" />
-                <span asp-validation-for="Balance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+        <form asp-controller="Employees"
+              asp-action="Edit"
+              method="post">
+            <span>Charging Price:</span> <input id="chargingPrice" type="text" name="chargingPrice" />
+            <input id="Submit1" type="submit" value="Confirm Pick-Up" />
         </form>
     </div>
 </div>
