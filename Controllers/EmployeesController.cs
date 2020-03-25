@@ -47,7 +47,7 @@ namespace Trash.Controllers
         public ActionResult FilterByDayOfWeek(string day)
         {
             //pass back a string value from View to Controller method
-            ViewData["CurrentFilter"] = String.IsNullOrEmpty(day);
+            ViewData["CurrentFilter"] = day;
 
             var customers = from s in _context.Customers
                             select s;
@@ -57,7 +57,7 @@ namespace Trash.Controllers
                 customers = customers.Where(c => c.PickUpDay.Contains(day));
             }
 
-            return View();
+            return View("FilterByDayOfWeek", "Employees");
         }
 
         // GET: Employees/Details/5
@@ -130,6 +130,22 @@ namespace Trash.Controllers
             }
         }
 
+        public ActionResult AllCustomerPickUpPinsOnMap()
+        {
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var employeeLoggedIn = _context.Employees.Where(e => e.IdentityUserId == userId).Single();
+
+            var customersNotSuspended = _context.Customers.Include(k => k.IdentityUser).Where(s => s.isSuspended == false).ToList();
+
+            //query customers variable by day of week (compare to today's day of week)
+            DateTime dt = DateTime.Now;
+            string day = dt.DayOfWeek.ToString();
+            //DateTime.Now
+            var customerPickUpDay = customersNotSuspended.Where(d => d.PickUpDay == day).ToList();
+            var customers = customerPickUpDay.Where(c => c.Zipcode == employeeLoggedIn.Zipcode).ToList();
+
+            return View(customers);
+        }
         // GET: Employees/Delete/5
         //public ActionResult Delete(int id)
         //{
