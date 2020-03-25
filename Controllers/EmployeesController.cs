@@ -43,12 +43,8 @@ namespace Trash.Controllers
 
             return View(customers);
         }
-
-        public ActionResult FilterByDayOfWeek(string day)
+        public async Task<IActionResult> FilterByDayOfWeek(string day)
         {
-            //pass back a string value from View to Controller method
-            ViewData["CurrentFilter"] = day;
-
             var customers = from s in _context.Customers
                             select s;
 
@@ -57,7 +53,7 @@ namespace Trash.Controllers
                 customers = customers.Where(c => c.PickUpDay.Contains(day));
             }
 
-            return View("FilterByDayOfWeek", "Employees");
+            return View(await customers.ToListAsync());
         }
 
         // GET: Employees/Details/5
@@ -116,10 +112,10 @@ namespace Trash.Controllers
         {
             try
             {
+                Customer newCustomer = _context.Customers.Where(a => a.CustomerId == id).Single();
                 //UPDATE Customer Balance??
                 int chargeForPickUp = 50;
                 // TODO: Add update logic here
-                Customer newCustomer = _context.Customers.Where(a => a.CustomerId == id).Single();
                 newCustomer.Balance = customer.Balance + chargeForPickUp;
                 _context.SaveChanges();
                 return RedirectToAction(nameof(Index));
@@ -144,7 +140,7 @@ namespace Trash.Controllers
             var customerPickUpDay = customersNotSuspended.Where(d => d.PickUpDay == day).ToList();
             var customers = customerPickUpDay.Where(c => c.Zipcode == employeeLoggedIn.Zipcode).ToList();
 
-            return View(customers);
+            return View("AllCustomerPickUpsOnMap", "Employees");
         }
         // GET: Employees/Delete/5
         //public ActionResult Delete(int id)

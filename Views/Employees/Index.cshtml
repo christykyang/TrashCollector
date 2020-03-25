@@ -8,9 +8,13 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a> |
-    <a asp-controller="Employees"
-       asp-action="FilterByDayOfWeek">Filter by Day</a>
+    <form asp-controller="Employees" asp-action="FilterByDayOfWeek">
+<p>
+    Filter by Day <input type="text" name="day">
+    <input type="submit" value="Filter" />
+</p>
+</form> |
+<a asp-action="AllCustomerPickUpsOnMap">View All Pick-Ups Today</a>
 </p>
 <table class="table">
     <thead>
@@ -95,8 +99,8 @@
                     @Html.DisplayFor(modelItem => item.isSuspended)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CustomerId">Pick Up Confirmation</a>
-                    <a asp-action="Details" asp-route-id="@item.CustomerId">Customer Information</a> |
+                    <a asp-action="Edit" asp-route-id="@item.CustomerId">Pick Up Confirmation</a> |
+                    <a asp-action="Details" asp-route-id="@item.CustomerId">Customer Information</a>
                 </td>
             </tr>
         }
